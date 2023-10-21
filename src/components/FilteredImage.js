@@ -95,7 +95,6 @@ const colorBlindnes = ['achromatomaly', 'achromatopsia', 'tritanomaly', 'tritano
 
 const FilteredImage = ({ originalImage }) => {
   const [filteredImage, setFilteredImage] = useState(null);
-  const [loopedImage, setloopedImage] = useState(null);
   const canvasRef = useRef(null);
 
   useEffect(() => {

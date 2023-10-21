@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <h1>Image Upload and Filter</h1>
       <ImageUpload onImageSelect={setSelectedImage} />
-      {selectedImage && <FilteredImage originalImage={selectedImage} />}
+      <FilteredImage originalImage={selectedImage} />
     </div>
   );
 }
