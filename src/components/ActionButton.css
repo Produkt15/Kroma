@@ -1,0 +1,10 @@
+.reset-filtered-image-area {
+    display: flex;
+    min-height: 62px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 2px;
+    background: var(--colors-white-bg, #FFFFFE);
+}

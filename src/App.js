@@ -1,5 +1,3 @@
-// src/App.js
-
 import React, { useState } from 'react';
 import './App.css';
 import FilteredImage from './components/FilteredImage';
