@@ -1,5 +1,3 @@
-// src/components/FilteredImage.js
-
 import React, { useState, useRef } from 'react';
 import FilterButtons, { colorBlindness } from './FilterButtons';
 import ImageUpload from './ImageUpload';
