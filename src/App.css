@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+/* App.css */
+.button {
+  background-color: #0074d9; /* Change the color to your preference */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3; /* Change the color on hover */
+}

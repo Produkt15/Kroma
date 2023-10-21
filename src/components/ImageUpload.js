@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const ImageUpload = ({ onImageSelect }) => {
+const ImageUpload = ({ onImageSelect, setHasImage }) => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
 
@@ -11,6 +11,7 @@ const ImageUpload = ({ onImageSelect }) => {
 
       reader.onload = (e) => {
         onImageSelect(e.target.result); // Pass the selected image data back to the parent
+        setHasImage(true);
       };
 
       reader.readAsDataURL(file);

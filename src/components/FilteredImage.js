@@ -93,7 +93,7 @@ const applyFilterToCtx = async (ctx, filter) => {
 const colorBlindnes = ['achromatomaly', 'achromatopsia', 'tritanomaly', 'tritanopia',
                        'deuteranomaly', 'protanomaly', 'protanopia']
 
-const FilteredImage = ({ originalImage }) => {
+const FilteredImage = ({ originalImage, hasImage, setHasImage, setOriginalImage }) => {
   const [filteredImage, setFilteredImage] = useState(null);
   const canvasRef = useRef(null);
 
@@ -119,6 +119,12 @@ const FilteredImage = ({ originalImage }) => {
       const filteredDataUrl = canvas.toDataURL();
       setFilteredImage(filteredDataUrl);
     };
+  };
+
+  const Reset = () => {
+    setOriginalImage(null);
+    setFilteredImage(null);
+    setHasImage(false);
   };
 
   const downloadFilteredImage = () => {
@@ -173,17 +179,17 @@ const FilteredImage = ({ originalImage }) => {
       <canvas ref={canvasRef} style={{ display: 'none' }} />
       
       <div>
-        <button onClick={() => applyFilter(colorBlindnes[0])}>Apply Achromatomaly Filter</button>
-        <button onClick={() => applyFilter(colorBlindnes[1])}>Apply Achromatopsia Filter</button>
-        <button onClick={() => applyFilter(colorBlindnes[2])}>Apply Tritanomaly Filter</button>
-        <button onClick={() => applyFilter(colorBlindnes[3])}>Apply Tritanopia Filter</button>
-        <button onClick={() => applyFilter(colorBlindnes[4])}>Apply Deuteranomaly Filter</button>
-        <button onClick={() => applyFilter(colorBlindnes[5])}>Apply Protanomaly Filter</button>
-        <button onClick={() => applyFilter(colorBlindnes[6])}>Apply Protanopia Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[0])}>Apply Achromatomaly Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[1])}>Apply Achromatopsia Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[2])}>Apply Tritanomaly Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[3])}>Apply Tritanopia Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[4])}>Apply Deuteranomaly Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[5])}>Apply Protanomaly Filter</button>
+        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[6])}>Apply Protanopia Filter</button>
       </div>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <h2>Filtered Image</h2>
-        <div style={{ width: '600px', height: '450px', backgroundColor: 'lightgrey', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ width: '900px', height: '600px', backgroundColor: 'lightgrey', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
         {filteredImage ? (
           <img
             src={filteredImage}
@@ -193,14 +199,24 @@ const FilteredImage = ({ originalImage }) => {
         ) : (
           <p>Upload an image to apply filters</p>
         )}
-      </div>
+        </div>
       </div>
       <div>
-        <button onClick={downloadFilteredImage}>Download Filtered Image</button>
-        <button onClick={downloadAll}>Download All</button>
+        {hasImage && <button className="button"  onClick={downloadFilteredImage}>Download Filtered Image</button>}
+        {hasImage && <button className="button"  onClick={downloadAll}>Download All</button>}
+        {hasImage && <button className="button"  onClick={Reset}>Reset</button>}
       </div>
     </div>
   );
+};
+
+const filterButtonStyle = {
+  backgroundColor: 'blue', // Change to your preferred background color
+  color: 'white', // Change to your preferred text color
+  padding: '10px 20px', // Adjust padding as needed
+  borderRadius: '5px', // Add rounded corners
+  margin: '5px', // Add margin between buttons
+  cursor: 'pointer', // Show pointer cursor on hover
 };
 
 export default FilteredImage;
