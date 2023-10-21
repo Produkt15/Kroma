@@ -183,12 +183,12 @@ const FilteredImage = ({ originalImage }) => {
       </div>
       <div>
         <h2>Filtered Image</h2>
-        <div style={{ width: '600px', height: '450px', backgroundColor: 'lightgrey' }}>
+        <div style={{ width: '600px', height: '450px', backgroundColor: 'lightgrey', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {filteredImage ? (
           <img
             src={filteredImage}
             alt="Filtered"
-            style={{ width: '600px', height: '450px', maxWidth: '100%'}}
+            style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
           />
         ) : (
           <p>Upload an image to apply filters</p>
