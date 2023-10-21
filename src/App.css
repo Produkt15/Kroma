@@ -51,3 +51,18 @@
 .button:hover {
   background-color: #0056b3; /* Change the color on hover */
 }
+
+.custom-file-upload {
+  display: inline-block;
+  background-color: #0074d9; /* Background color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold; /* Make text bold */
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3; /* Background color on hover */
+}

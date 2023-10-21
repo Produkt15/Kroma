@@ -1,8 +1,8 @@
-// src/components/ImageUpload.js
-
-import React from 'react';
+import React, { useRef } from 'react';
 
 const ImageUpload = ({ onImageSelect, setHasImage }) => {
+  const fileInputRef = useRef(null);
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
 
@@ -10,7 +10,7 @@ const ImageUpload = ({ onImageSelect, setHasImage }) => {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        onImageSelect(e.target.result); // Pass the selected image data back to the parent
+        onImageSelect(e.target.result);
         setHasImage(true);
       };
 
@@ -18,9 +18,22 @@ const ImageUpload = ({ onImageSelect, setHasImage }) => {
     }
   };
 
+  const openFileDialog = () => {
+    fileInputRef.current.click();
+  };
+
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: 'none' }} // Hide the input element
+        onChange={handleImageUpload}
+      />
+      <label className="custom-file-upload" onClick={openFileDialog}>
+        Choose File
+      </label>
     </div>
   );
 };
