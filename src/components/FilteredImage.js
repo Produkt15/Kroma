@@ -1,6 +1,11 @@
 // src/components/FilteredImage.js
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import FilterButtons, { colorBlindness } from './FilterButtons';
+import ImageUpload from './ImageUpload';
+import Button from './Button';
+import './TabGroup.css';
+import "./Tab.css";
 
 
 const applyMatrix = (ctx, matrix) => {
@@ -21,7 +26,6 @@ const applyMatrix = (ctx, matrix) => {
 };
 
 const applyFilterToCtx = async (ctx, filter) => {
-  // Apply the selected filter
   if (filter === 'default') {
     const matrix = [
       0.618, 0.320, 0.062, 0, 0,
@@ -30,7 +34,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[0]) {
+  } else if (filter === colorBlindness[0]) {
     const matrix = [
       0.618, 0.320, 0.062, 0, 0,
       0.163, 0.775, 0.062, 0, 0,
@@ -38,7 +42,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[1]) {
+  } else if (filter === colorBlindness[1]) {
     const matrix = [
       0.299, 0.587, 0.114, 0, 0,
       0.299, 0.587, 0.114, 0, 0,
@@ -46,7 +50,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[2]) {
+  } else if (filter === colorBlindness[2]) {
     const matrix = [
       0.967, 0.033, 0, 0, 0,
       0, 0.733, 0.267, 0, 0,
@@ -54,7 +58,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[3]) {
+  } else if (filter === colorBlindness[3]) {
     const matrix = [
       0.95, 0.05, 0, 0, 0,
       0, 0.433, 0.567, 0, 0,
@@ -62,7 +66,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[4]) {
+  } else if (filter === colorBlindness[4]) {
     const matrix = [
       0.8, 0.2, 0, 0, 0,
       0.258, 0.742, 0, 0, 0,
@@ -70,7 +74,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[5]) {
+  } else if (filter === colorBlindness[5]) {
     const matrix = [
       0.817, 0.183, 0, 0, 0,
       0.333, 0.667, 0, 0, 0,
@@ -78,7 +82,7 @@ const applyFilterToCtx = async (ctx, filter) => {
       0, 0, 0, 1, 0,
     ];
     applyMatrix(ctx, matrix);
-  } else if (filter === colorBlindnes[7]) {
+  } else if (filter === colorBlindness[7]) {
     const matrix = [
       0.567, 0.433, 0, 0, 0,
       0.558, 0.442, 0, 0, 0,
@@ -87,21 +91,11 @@ const applyFilterToCtx = async (ctx, filter) => {
     ];
     applyMatrix(ctx, matrix);
   }
-}
-
-
-const colorBlindnes = ['achromatomaly', 'achromatopsia', 'tritanomaly', 'tritanopia',
-                       'deuteranomaly', 'protanomaly', 'protanopia']
+};
 
 const FilteredImage = ({ originalImage, hasImage, setHasImage, setOriginalImage }) => {
   const [filteredImage, setFilteredImage] = useState(null);
   const canvasRef = useRef(null);
-
-  useEffect(() => {
-    if (originalImage) {
-      applyFilter();
-    }
-  }, [originalImage]);
 
   const applyFilter = (filter) => {
     const canvas = canvasRef.current;
@@ -115,7 +109,6 @@ const FilteredImage = ({ originalImage, hasImage, setHasImage, setOriginalImage 
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0, img.width, img.height);
       applyFilterToCtx(ctx, filter)
-      // Get the filtered image data
       const filteredDataUrl = canvas.toDataURL();
       setFilteredImage(filteredDataUrl);
     };
@@ -130,7 +123,7 @@ const FilteredImage = ({ originalImage, hasImage, setHasImage, setOriginalImage 
   const downloadFilteredImage = () => {
     const a = document.createElement('a');
     a.href = filteredImage;
-    a.download = 'filtered_image.png'; // Set the desired filename
+    a.download = 'filtered_image.png';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -138,85 +131,97 @@ const FilteredImage = ({ originalImage, hasImage, setHasImage, setOriginalImage 
 
   const downloadAll = async () => {
     const downloadPromises = [];
-  
+
     for (let i = 0; i < 7; i += 1) {
       const canvasCopy = document.createElement('canvas');
       const ctxCopy = canvasCopy.getContext('2d');
-  
+
       const img = new Image();
       img.src = originalImage;
-  
+
       img.onload = async () => {
         canvasCopy.width = img.width;
         canvasCopy.height = img.height;
         ctxCopy.drawImage(img, 0, 0, img.width, img.height);
-  
-        await applyFilterToCtx(ctxCopy, colorBlindnes[i])
-  
-        const dataUrl = canvasCopy.toDataURL(); // Create a data URL for the filtered image
+
+        await applyFilterToCtx(ctxCopy, colorBlindness[i])
+
+        const dataUrl = canvasCopy.toDataURL();
         const downloadPromise = new Promise((resolve) => {
           const a = document.createElement('a');
           a.href = dataUrl;
-          a.download = `filteredImage_${colorBlindnes[i]}.png`;
+          a.download = `filteredImage_${colorBlindness[i]}.png`;
           a.onload = resolve;
           a.click();
         });
-  
+
         downloadPromises.push(downloadPromise);
       };
     }
-  
-    // Wait for all downloads to complete
+
     Promise.all(downloadPromises).then(() => {
       console.log('All downloads completed');
     });
   };
-  
-  
-  
+
   return (
     <div>
       <canvas ref={canvasRef} style={{ display: 'none' }} />
-      
-      <div>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[0])}>Apply Achromatomaly Filter</button>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[1])}>Apply Achromatopsia Filter</button>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[2])}>Apply Tritanomaly Filter</button>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[3])}>Apply Tritanopia Filter</button>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[4])}>Apply Deuteranomaly Filter</button>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[5])}>Apply Protanomaly Filter</button>
-        <button style={filterButtonStyle} onClick={() => applyFilter(colorBlindnes[6])}>Apply Protanopia Filter</button>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <h2>Filtered Image</h2>
-        <div style={{ width: '900px', height: '600px', backgroundColor: 'lightgrey', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
-        {filteredImage ? (
-          <img
-            src={filteredImage}
-            alt="Filtered"
-            style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
-          />
-        ) : (
-          <p>Upload an image to apply filters</p>
-        )}
+
+      <div className="container">
+        <div className="centered">
+          <FilterButtons applyFilter={applyFilter} />
         </div>
       </div>
-      <div>
-        {hasImage && <button className="button"  onClick={downloadFilteredImage}>Download Filtered Image</button>}
-        {hasImage && <button className="button"  onClick={downloadAll}>Download All</button>}
-        {hasImage && <button className="button"  onClick={Reset}>Reset</button>}
+      <section className="dropzone">
+        <div className="dropzone-content" style={{ width: '1200', height: '400px'}}>
+          <div className="dropzone-upload">
+          <div className="to-get-started">
+            {hasImage ? (
+              filteredImage ? (<img
+                src={filteredImage}
+                alt="Filtered"
+                style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
+              />) : (
+                <img
+                src={originalImage}
+                alt="Filtered"
+                style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
+              />
+              )
+              
+            ) : ( 
+              <div>
+              <p>Upload an image from your computer.</p>
+              {!(hasImage) && <ImageUpload onImageSelect={setOriginalImage} setHasImage={setHasImage} />}
+              </div>
+            )}
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="tab-group">
+      {hasImage && <Button
+          label="Download Filtered Image"
+          hasLeftIcon={true}
+          hasRightIcon={false}
+          onClick={downloadFilteredImage}
+        />}
+        {hasImage && <Button
+          label="Download All"
+          hasLeftIcon={true}
+          hasRightIcon={false}
+          onClick={downloadAll}
+        />}
+        {hasImage && <Button
+          label="Reset"
+          hasLeftIcon={true}
+          hasRightIcon={false}
+          onClick={Reset}
+        />}
       </div>
     </div>
   );
-};
-
-const filterButtonStyle = {
-  backgroundColor: 'blue', // Change to your preferred background color
-  color: 'white', // Change to your preferred text color
-  padding: '10px 20px', // Adjust padding as needed
-  borderRadius: '5px', // Add rounded corners
-  margin: '5px', // Add margin between buttons
-  cursor: 'pointer', // Show pointer cursor on hover
 };
 
 export default FilteredImage;

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import UploadButton from './UploadButton';
 
 const ImageUpload = ({ onImageSelect, setHasImage }) => {
-  const fileInputRef = useRef(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -18,22 +18,11 @@ const ImageUpload = ({ onImageSelect, setHasImage }) => {
     }
   };
 
-  const openFileDialog = () => {
-    fileInputRef.current.click();
-  };
-
   return (
     <div>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        style={{ display: 'none' }} // Hide the input element
-        onChange={handleImageUpload}
-      />
-      <label className="custom-file-upload" onClick={openFileDialog}>
-        Choose File
-      </label>
+      <div>
+      <UploadButton onImageSelect={handleImageUpload} />
+    </div>
     </div>
   );
 };

@@ -1,0 +1,11 @@
+.tab-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+  text-align: center;
+  font-size: var(--font-size-base);
+  color: var(--colors-black);
+  font-family: var(--font-ibm-plex-mono);
+}

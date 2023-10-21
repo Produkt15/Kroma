@@ -1,0 +1,21 @@
+.protanomaly {
+  position: relative;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: var(--font-ibm-plex-mono);
+  color: var(--colors-black);
+  text-align: center;
+}
+.tab {
+  cursor: pointer;
+  border: 1px solid var(--colors-black);
+  padding: var(--padding-xs) var(--padding-5xs);
+  background-color: var(--colors-white);
+  border-radius: var(--br-11xs);
+  box-sizing: border-box;
+  width: 152px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

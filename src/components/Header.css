@@ -1,0 +1,20 @@
+.create-visible-interfaces {
+  position: relative;
+  font-weight: 500;
+}
+.header {
+  background-color: var(--colors-white-bg);
+  border-bottom: 1px solid var(--color-darkgray-100);
+  box-sizing: border-box;
+  width: 1440px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-13xl) var(--padding-11xl);
+  text-align: right;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-ibm-plex-mono);
+}

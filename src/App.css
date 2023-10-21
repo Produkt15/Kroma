@@ -1,68 +1,154 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-ibm-plex-mono: "IBM Plex Mono";
+
+  /* font sizes */
+  --font-size-xl: 20px;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+
+  /* Colors */
+  --colors-white-bg: #fffffe;
+  --colors-white: #fcfefb;
+  --colors-black: #242424;
+  --colors-bg-gray: #f5f4f3;
+  --colors-medium-gray: #a7a7a7;
+  --color-darkgray-100: #979493;
+  --colors-dark-gray: #585858;
+  --color-black: #000;
+
+  /* Gaps */
+  --gap-base: 16px;
+  --gap-29xl: 48px;
+  --gap-xs: 12px;
+
+  /* Paddings */
+  --padding-base: 16px;
+  --padding-xs: 12px;
+  --padding-5xs: 8px;
+  --padding-13xl: 32px;
+  --padding-11xl: 30px;
+  --padding-29xl: 48px;
+  --padding-206xl: 225px;
+
+  /* Border radiuses */
+  --br-11xs: 2px;
+  --br-5xs: 8px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.create-visible-interfaces {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 500;
+  font-family: inherit;
+}
+.header {
+  align-self: stretch;
+  background-color: var(--colors-white-bg);
+  border-bottom: 1px solid var(--color-darkgray-100);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-13xl) var(--padding-11xl);
+  text-align: right;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-ibm-plex-mono);
+}
+.vector-icon {
+  position: absolute;
+  bottom: -64px;
+  left: calc(50% - 710px);
+  width: 1420px;
+  height: 964px;
+}
+.color-blindness-type {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+}
+.to-get-started {
+  align-self: stretch;
+  position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.dropzone-content,
+.dropzone-upload {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+}
+.dropzone-content {
+  align-self: stretch;
+  gap: var(--gap-29xl);
+}
+.dropzone {
+  align-self: stretch;
+  border-radius: var(--br-5xs);
+  background-color: var(--colors-white-bg);
+  border: 1px solid var(--color-darkgray-100);
+  overflow: hidden;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: var(--padding-29xl) var(--padding-206xl);
+  text-align: center;
+  font-size: var(--font-size-base);
+  color: var(--colors-black);
+  font-family: var(--font-ibm-plex-mono);
 }
-
-.App-link {
-  color: #61dafb;
+.content,
+.dropzone,
+.frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.content {
+  align-self: stretch;
+  justify-content: flex-start;
+  gap: var(--gap-base);
 }
-
-/* App.css */
-.button {
-  background-color: #0074d9; /* Change the color to your preference */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  margin: 5px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #0056b3; /* Change the color on hover */
-}
-
-.custom-file-upload {
+.frame {
   display: inline-block;
-  background-color: #0074d9; /* Background color */
-  color: white; /* Text color */
-  padding: 10px 20px; /* Padding */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold; /* Make text bold */
+  position: relative;
+  top: 20px;
+  left: auto;
+  right: auto;
+  width: 1288px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
-
-.custom-file-upload:hover {
-  background-color: #0056b3; /* Background color on hover */
+.body,
+.home {
+  position: relative;
+  overflow: hidden;
+}
+.body {
+  align-self: stretch;
+  height: 920px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-ibm-plex-mono);
+}
+.home {
+  background-color: #fffffb;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
