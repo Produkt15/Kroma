@@ -171,6 +171,7 @@ const FilteredImage = ({ originalImage }) => {
   return (
     <div>
       <canvas ref={canvasRef} style={{ display: 'none' }} />
+      
       <div>
         <button onClick={() => applyFilter(colorBlindnes[0])}>Apply Achromatomaly Filter</button>
         <button onClick={() => applyFilter(colorBlindnes[1])}>Apply Achromatopsia Filter</button>
@@ -182,7 +183,17 @@ const FilteredImage = ({ originalImage }) => {
       </div>
       <div>
         <h2>Filtered Image</h2>
-        <img src={filteredImage} alt="Filtered" style={{ maxWidth: '100%' }} />
+        <div style={{ width: '600px', height: '450px', backgroundColor: 'lightgrey' }}>
+        {filteredImage ? (
+          <img
+            src={filteredImage}
+            alt="Filtered"
+            style={{ width: '600px', height: '450px', maxWidth: '100%'}}
+          />
+        ) : (
+          <p>Upload an image to apply filters</p>
+        )}
+      </div>
       </div>
       <div>
         <button onClick={downloadFilteredImage}>Download Filtered Image</button>
