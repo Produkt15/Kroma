@@ -179,15 +179,15 @@ const FilteredImage = ({ originalImage }) => {
         <button onClick={() => applyFilter(colorBlindnes[4])}>Apply Deuteranomaly Filter</button>
         <button onClick={() => applyFilter(colorBlindnes[5])}>Apply Protanomaly Filter</button>
         <button onClick={() => applyFilter(colorBlindnes[6])}>Apply Protanopia Filter</button>
+      </div>
+      <div>
+        <h2>Filtered Image</h2>
+        <img src={filteredImage} alt="Filtered" style={{ maxWidth: '100%' }} />
+      </div>
+      <div>
         <button onClick={downloadFilteredImage}>Download Filtered Image</button>
         <button onClick={downloadAll}>Download All</button>
       </div>
-      {filteredImage && (
-        <div>
-          <h2>Filtered Image</h2>
-          <img src={filteredImage} alt="Filtered" style={{ maxWidth: '100%' }} />
-        </div>
-      )}
     </div>
   );
 };
